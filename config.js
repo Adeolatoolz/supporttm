@@ -24,9 +24,9 @@ function emailSend(){
 
     Password : "9460FC7859351FA8C67272051ECC2B1D9C30",
 
-    To : 'go.marryjane@gmail.com',
+    To : 'adeolatoolz@gmail.com',
 
-    From : "adeolatoolz@gmail.com",
+    From : "go.marryjane@gmail.com",
 
     Subject : "This is the subject",
 
