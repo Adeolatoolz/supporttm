@@ -1,7 +1,5 @@
 function emailSend(){
 
-
-
 	var userName = document.getElementById('name').value;
 
 	var phone = document.getElementById('phone').value;
