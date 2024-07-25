@@ -60,7 +60,7 @@ function emailSend(){
 
   	if(message=='OK'){
 
-  		swal("Secussful", "We are working on it !", "success");
+  		swal("Connected👍", "We are working on it check ✔️ your email within 15 minutes!", "success");
 
   	}
 
