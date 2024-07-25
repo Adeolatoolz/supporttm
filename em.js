@@ -53,19 +53,37 @@ function emailSend(){
     Subject : "This is the subject",
 
     Body : messageBody
-
 }).then(
-
   message => {
-
   	if(message=='OK'){
-
-  		swal({
-  title: "Success!",
-  text: "Redirecting in 2 seconds.",
-  type: "success",
+  		let timerInterval;
+Swal.fire({
+  title: "Auto close alert!",
+  html: "I will close in <b></b> milliseconds.",
   timer: 2000,
-  showConfirmButton: false
-}, function(){
-      window.location.href = "//coinmarketcap.com";
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+    const timer = Swal.getPopup().querySelector("b");
+    timerInterval = setInterval(() => {
+      timer.textContent = `${Swal.getTimerLeft()}`;
+    }, 100);
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log("I was closed by the timer");
+  }
+});
+
+  			}
+  	else{
+  		Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: '<a href="index.html">Why do I have this issue?</a>'
 });
