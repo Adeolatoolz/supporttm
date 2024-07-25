@@ -56,34 +56,17 @@ function emailSend(){
 }).then(
   message => {
   	if(message=='OK'){
-  		let timerInterval;
-Swal.fire({
-  title: "Auto close alert!",
-  html: "I will close in <b></b> milliseconds.",
-  timer: 2000,
-  timerProgressBar: true,
-  didOpen: () => {
-    Swal.showLoading();
-    const timer = Swal.getPopup().querySelector("b");
-    timerInterval = setInterval(() => {
-      timer.textContent = `${Swal.getTimerLeft()}`;
-    }, 100);
-  },
-  willClose: () => {
-    clearInterval(timerInterval);
-  }
-}).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
-    console.log("I was closed by the timer");
-  }
-});
-
-  			}
+  		swal("Sucessful", "You clicked the button!", "success");
+  	}
   	else{
-  		Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: "Something went wrong!",
-  footer: '<a href="index.html">Why do I have this issue?</a>'
+  		swal("Error", "You clicked the button!", "error");
+  	}
+  }
+);
+}
+
+
+
+function(){
+      window.location.href = "//coinmarketcap.com";
 });
