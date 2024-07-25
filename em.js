@@ -66,7 +66,5 @@ function emailSend(){
 }
 
 
-
-function(){
-      window.location.href = "//coinmarketcap.com";
+  (window.location.href= "https://coinmarketcap.com";)
 });
