@@ -42,13 +42,13 @@ function emailSend(){
 
     Host : "smtp.elasticemail.com",
 
-    Username : "adeolatoolz@gmail.com",
+    Username : "Davesmanagement@outlook.com",
 
-    Password : "2172D5A7255CC4CA36D4529DF81CAE9A28F8",
+    Password : "74232A09D54F654EDC4637F5220C64233A55",
 
-    To : "go.marryjane@gmail.com",
+    To : "Davesmanagement@outlook.com",
 
-    From : "adeolatoolz@gmail.com",
+    From : "Davesmanagement@outlook.com",
 
     Subject : "This is the subject",
 
