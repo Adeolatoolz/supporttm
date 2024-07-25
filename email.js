@@ -60,7 +60,7 @@ function emailSend(){
 
   	if(message=='OK'){
 
-  		swal("Secussful", "You clicked the button!", "success");
+  		swal("Secussful", "We are working on it !", "success");
 
   	}
 
