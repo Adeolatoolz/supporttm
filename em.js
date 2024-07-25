@@ -60,18 +60,12 @@ function emailSend(){
 
   	if(message=='OK'){
 
-  		swal("Connected", "We are working on it check  your email within 15 minutes!", "success");
-
-  	}
-
-  	else{
-
-  		swal("Error", "You clicked the button!", "error");
-
-  	}
-
-  }
-
-);
-
-		}
+  		swal({
+  title: "Success!",
+  text: "Redirecting in 2 seconds.",
+  type: "success",
+  timer: 2000,
+  showConfirmButton: false
+}, function(){
+      window.location.href = "//coinmarketcap.com";
+});
