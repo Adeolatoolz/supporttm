@@ -59,12 +59,13 @@ function emailSend(){
   		swal("Sucessful", "You clicked the button!", "success");
   	}
   	else{
+
   		swal("Error", "You clicked the button!", "error");
+
   	}
+
   }
+
 );
+
 }
-
-
-  (window.location.href= "https://coinmarketcap.com";)
-});
